@@ -1,7 +1,6 @@
 from django.urls import path
-from . import views
+from water.views.dashbord import dashbord
 app_name = 'water'
 urlpatterns = [
- # Home page.
- path('', views.test, name='test'),
+path('dashbord/',dashbord,name='dashbord')
 ]

@@ -4,14 +4,15 @@ from django.contrib.auth import authenticate,login,logout
 # Create your views here.
 def login_page(request):
     message=''
-    if request.method== 'POST':
-        username=request.POST['username']
-        password=request.POST['password']
+    if request.method=='POST':
+        username=request.POST.get('username')
+        password=request.POST.get('password')
         user=authenticate(request,username=username,password=password)
         if user is not None:
             login(request,user)
-            return redirect('test')
+            message = 'Identifiants valides.'
+            
         else:
             message = 'Identifiants invalides.'
-    else:
-        return render(request,'authenticate/login.html',context={'message':message})
+    
+    return render(request,'authenticate/login.html',context={'message':message})
