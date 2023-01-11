@@ -11,7 +11,7 @@ def login_page(request):
         if user is not None:
             login(request,user)
             message = 'Identifiants valides.'
-            
+            return redirect("/water/dashbord/")
         else:
             message = 'Identifiants invalides.'
     
