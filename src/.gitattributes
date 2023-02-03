@@ -2,3 +2,6 @@
 *.css linguist-detectable=false
 *.ts linguist-detectable=false
 *.scss linguist-detectable=false
+*.py linguist-detectable=true
+*.html linguist-detectable=false
+
