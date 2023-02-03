@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block content %}
+    <!--begin::Advance Table Widget 10-->
+    <div class="card card-custom gutter-b">
+        <!--begin::Header-->
+        <div class="card-header border-0 py-5">
+            <h3 class="card-title align-items-start flex-column">
+                <span class="card-label font-weight-bolder text-dark">Liste des Clients du  distributeur {{distributeur.nom}} </span>
+               <!--<span class="text-muted mt-3 font-weight-bold font-size-sm">More than 400+ new members</span>--> 
+            </h3>
+            <!--<div class="card-toolbar"> 
+                <a href="{% url 'water:create_distributeur' %}" class="btn btn-info font-weight-bolder font-size-sm">Enregistrer distributeur</a>
+            </div>-->
+            
+        </div>
+        <!--end::Header-->
+        <!--begin::Body-->
+        <div class="card-body py-0">
+            <!--begin::Table-->
+            <div class="table-responsive">
+                <table class="table table-head-custom table-vertical-center" id="kt_advance_table_widget_4">
+                    <thead>
+                        <tr class="text-left">
+                            
+                            <th class="pl-0" style="min-width: 120px">#</th>
+                            <th style="min-width: 110px">Nom</th>
+                            <th style="min-width: 110px">
+                                <span class="text-info">Date</span>
+                                <span class="svg-icon svg-icon-sm svg-icon-primary">
+                                    <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Down-2.svg-->
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <polygon points="0 0 24 0 24 24 0 24" />
+                                            <rect fill="#000000" opacity="0.3" x="11" y="4" width="2" height="10" rx="1" />
+                                            <path d="M6.70710678,19.7071068 C6.31658249,20.0976311 5.68341751,20.0976311 5.29289322,19.7071068 C4.90236893,19.3165825 4.90236893,18.6834175 5.29289322,18.2928932 L11.2928932,12.2928932 C11.6714722,11.9143143 12.2810586,11.9010687 12.6757246,12.2628459 L18.6757246,17.7628459 C19.0828436,18.1360383 19.1103465,18.7686056 18.7371541,19.1757246 C18.3639617,19.5828436 17.7313944,19.6103465 17.3242754,19.2371541 L12.0300757,14.3841378 L6.70710678,19.7071068 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.000003, 15.999999) scale(1, -1) translate(-12.000003, -15.999999)" />
+                                        </g>
+                                    </svg>
+                                    <!--end::Svg Icon-->
+                                </span>
+                            </th>
+                            <th style="min-width: 120px">Contact</th>
+                            <th style="min-width: 120px">Adresse</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for client in distributeur_client_list %}
+                            <tr>
+                                <td><a href="">{{forloop.counter}}</a> </td>
+                                <td>{{client.nom}}</td>
+                                <td>{{client.dateCreation|date:'j/m/y'}}</td>
+                                <td>{{client.contact}}</td>
+                                <td>{{client.adresse}}</td>
+                               
+                                
+                            </tr>
+                          
+                        {% endfor %}
+                        
+                        
+                        
+                    </tbody>
+                </table>
+                <div>
+                    {% if list_distributeur.has_previous %}
+                        <a href="{% url 'distributeur' %}?page={{list_distributeur.previous_page_number}}">Précédent</a>
+                    {% endif %}
+                    
+                    <span>
+                         page {{list_distributeur.number}} sur {{list_distributeur.paginator.num_pages}} 
+                    </span>
+              
+                    {% if list_distributeur.has_next %}
+                    <a href="{% url 'distributeur' %}?page={{list_distributeur.next_page_number}}">Suivant</a>
+                    {% endif %}
+                </div>
+            </div>
+            <!--end::Table-->
+        </div>
+        <!--end::Body-->
+    </div>
+    <!--end::Advance Table Widget 10-->
+  
+{% endblock content %}

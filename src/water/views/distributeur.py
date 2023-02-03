@@ -1,11 +1,21 @@
 from django.shortcuts import render,get_object_or_404,redirect
+from django.core.paginator import Paginator,EmptyPage
 from django.contrib import messages
 from django.views.generic import UpdateView
 
 from water.models.distributeur import Distributeur
 def distributeur(request):
     list_distributeur=Distributeur.objects.all()
-    return render(request,'water/distributeur.html',context={'list_distributeur':list_distributeur})
+    paginator= Paginator(list_distributeur.order_by('-dateCreation'),10)
+    
+    try:
+        page= request.GET.get("page")
+        if not page:
+            page=1
+            list_distributeur=paginator.page(page)
+    except EmptyPage:
+        list_distributeur=paginator.page(paginator.num_pages())
+    return render(request,'water/distributeur.html',locals())
 
 def create_distributeur(request):
     if request.method=="POST":
@@ -15,6 +25,7 @@ def create_distributeur(request):
         
         distributeur= Distributeur(nom=nom,contact=contact,adresse=adresse)
         distributeur.save()
+    
     
     return render(request,"water/form_distributeur.html")
 
@@ -34,5 +45,10 @@ class UpdateDistributeur(UpdateView):
         distributeur.adresse = request.POST.get('adresse')
         distributeur.save()
         return redirect('/water/distributeur/')
+
+def distributeur_client_list(request):
+    
+    return render(request,"water/client_list.html")
+    
         
         

@@ -5,8 +5,8 @@
         <!--begin::Header-->
         <div class="card-header border-0 py-5">
             <h3 class="card-title align-items-start flex-column">
-                <span class="card-label font-weight-bolder text-dark">New Arrivals</span>
-                <span class="text-muted mt-3 font-weight-bold font-size-sm">More than 400+ new members</span>
+                <span class="card-label font-weight-bolder text-dark">Liste des distributeurs</span>
+               <!--<span class="text-muted mt-3 font-weight-bold font-size-sm">More than 400+ new members</span>--> 
             </h3>
             <div class="card-toolbar"> 
                 <a href="{% url 'water:create_distributeur' %}" class="btn btn-info font-weight-bolder font-size-sm">Enregistrer distributeur</a>
@@ -45,13 +45,13 @@
                     <tbody>
                         {% for distributeur in list_distributeur %}
                             <tr>
-                                <td>{{forloop.counter}}</td>
-                                <td>{{distributeur.nom}}</td>
+                                <td>{{forloop.counter}} </td>
+                                <td><a href="{% url 'water:clientList' distributeur.pk %}">{{distributeur.nom}}</a></td>
                                 <td>{{distributeur.dateCreation|date:'j/m/y'}}</td>
                                 <td>{{distributeur.contact}}</td>
                                 <td>{{distributeur.adresse}}</td>
                                 <td class="pr-0 text-right">
-                                    <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm">
+                                    <a href="{% url 'water:provisionDis' distributeur.pk %}" class="btn btn-icon btn-light btn-hover-primary btn-sm">
                                         <span class="svg-icon svg-icon-md svg-icon-primary">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg-->
                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -100,6 +100,19 @@
                         
                     </tbody>
                 </table>
+                <div>
+                    {% if list_distributeur.has_previous %}
+                        <a href="{% url 'distributeur' %}?page={{list_distributeur.previous_page_number}}">Précédent</a>
+                    {% endif %}
+                    
+                    <span>
+                         page {{list_distributeur.number}} sur {{list_distributeur.paginator.num_pages}} 
+                    </span>
+              
+                    {% if list_distributeur.has_next %}
+                    <a href="{% url 'distributeur' %}?page={{list_distributeur.next_page_number}}">Suivant</a>
+                    {% endif %}
+                </div>
             </div>
             <!--end::Table-->
         </div>

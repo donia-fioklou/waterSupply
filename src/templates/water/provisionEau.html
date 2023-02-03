@@ -4,21 +4,24 @@
     <div class="card-header">
      <div class="card-title">
       <h3 class="card-label">
+        <form class="form" method="post">
+            {% csrf_token %}
         <div class="form-group row">
             <label class="col-lg-3 col-form-label text-right">Quantité</label>
             <div class="col-lg-6">
-                <input type="number" min="1"  name="qte" required value="" class="form-control" placeholder="Entrez la quantité reçue"/>   
+                <input type="number" min="1"  name="qte" value="{{provision_eau.qte}}" required value="" class="form-control" placeholder="Entrez la quantité reçue"/>   
             </div>
+            
             <div class="card-footer">
-                <div class="row">
-                    <div class="col-lg-3"></div>
+                
                     <div class="row-lg-6">
                         <button type="submit" class="btn font-weight-bold btn-primary mr-2">Submit</button>
                         <button type="reset" class="btn font-weight-bold btn-secondary">Cancel</button>
                     </div>
-                </div>
+                
             </div>
         </div>
+        </form>
       </h3>
      </div>
     </div>
@@ -31,7 +34,8 @@
                         <tr class="text-left">
                             
                             <th class="pl-0" style="min-width: 120px">#</th>
-                            <th style="min-width: 110px">Nom</th>
+                            <th style="min-width: 110px">Code</th>
+                            <th style="min-width: 110px">Quantité</th>
                             <th style="min-width: 110px">
                                 <span class="text-info">Date</span>
                                 <span class="svg-icon svg-icon-sm svg-icon-primary">
@@ -46,19 +50,20 @@
                                     <!--end::Svg Icon-->
                                 </span>
                             </th>
-                            <th style="min-width: 120px">Contact</th>
-                            <th style="min-width: 120px">Adresse</th>
+                            
                             <th class="pr-0 text-right" style="min-width: 160px">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for distributeur in list_distributeur %}
+                        {% for provision in list_provision %}
                             <tr>
-                               <!--td>{{distributeur.nom}}</td>
-                                <td>{{distributeur.dateCreation|date:'j/m/y'}}</td>
-                                <td>{{distributeur.contact}}</td>
-                                <td>{{distributeur.adresse}}</td>--> <td>{{forloop.counter}}</td>
-                                <
+                                <td>{{forloop.counter}}</td>
+                                <td>{{provision.code}}</td>
+                                <td>{{provision.qte}}</td>
+                                <td>{{provision.date_prov|date:'j/m/y'}}</td>
+                                
+                                
+                                
                                 <td class="pr-0 text-right">
                                     <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm">
                                         <span class="svg-icon svg-icon-md svg-icon-primary">
@@ -74,7 +79,7 @@
                                         </span>
                                     </a>
                                     
-                                    <a href="{% url 'water:' %}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
+                                    <a href="{% url 'water:update_provisionDis' provision.pk  %}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                                         <span class="svg-icon svg-icon-md svg-icon-primary">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Write.svg-->
                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

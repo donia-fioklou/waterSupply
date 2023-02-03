@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-ax#7q&*h8dxd4-3xmh^w6&i#&$_y8a)gzoa1_01_fcdr7wuuy0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['','127.0.0.1']
 
 
 # Application definition
@@ -43,7 +43,21 @@ INSTALLED_APPS = [
     'authentication',
     'water',
     'django_safe_settings',
+    'rest_framework.authtoken',
 ]
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+    
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
