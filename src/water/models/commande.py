@@ -1,11 +1,11 @@
 from django.db import models
 
 from water.models.client import Client
-from water.models.distributeur import Distributeur
+from authentication.models import User
 
 class Commmande(models.Model):
     client=models.ForeignKey(Client,on_delete= models.CASCADE)
-    distributeur=models.ForeignKey(Distributeur,on_delete=models.CASCADE)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
     qte_sachet=models.PositiveIntegerField()
     date_com=models.DateField(auto_now_add=True)
     montant=models.FloatField(blank=True)

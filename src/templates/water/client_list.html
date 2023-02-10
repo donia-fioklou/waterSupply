@@ -5,12 +5,10 @@
         <!--begin::Header-->
         <div class="card-header border-0 py-5">
             <h3 class="card-title align-items-start flex-column">
-                <span class="card-label font-weight-bolder text-dark">Liste des Clients du  distributeur {{distributeur.nom}} </span>
+                <span class="card-label font-weight-bolder text-dark">Liste des Clients du  distributeur {{user.username}} </span>
                <!--<span class="text-muted mt-3 font-weight-bold font-size-sm">More than 400+ new members</span>--> 
             </h3>
-            <!--<div class="card-toolbar"> 
-                <a href="{% url 'water:create_distributeur' %}" class="btn btn-info font-weight-bolder font-size-sm">Enregistrer distributeur</a>
-            </div>-->
+           
             
         </div>
         <!--end::Header-->
@@ -61,19 +59,20 @@
                         
                     </tbody>
                 </table>
-                <div>
-                    {% if list_distributeur.has_previous %}
-                        <a href="{% url 'distributeur' %}?page={{list_distributeur.previous_page_number}}">Précédent</a>
+                <!--<div>
+                    {% if list_user.has_previous %}
+                        <a href="{% url 'client' %}?page={{list_user.previous_page_number}}">Précédent</a>
                     {% endif %}
                     
                     <span>
-                         page {{list_distributeur.number}} sur {{list_distributeur.paginator.num_pages}} 
+                         page {{list_user.number}} sur {{list_user.paginator.num_pages}} 
                     </span>
               
-                    {% if list_distributeur.has_next %}
-                    <a href="{% url 'distributeur' %}?page={{list_distributeur.next_page_number}}">Suivant</a>
+                    {% if list_user.has_next %}
+                    <a href="{% url 'client' %}?page={{list_user.next_page_number}}">Suivant</a>
                     {% endif %}
-                </div>
+                </div>-->
+                
             </div>
             <!--end::Table-->
         </div>

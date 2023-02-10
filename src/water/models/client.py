@@ -1,9 +1,10 @@
 from django.db import models
+from authentication.models import User
 
-from water.models.distributeur import Distributeur
+#from authentication.models import User
 from water.models.localisation import Localisation
 class Client(models.Model):
-    distributeur=models.ForeignKey(Distributeur,on_delete=models.CASCADE)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
     nom=models.CharField( max_length=50)
     contact=models.IntegerField(max_length=8)
     adresse=models.CharField(max_length=200)

@@ -2,53 +2,52 @@ from django.shortcuts import render,get_object_or_404,redirect
 from django.core.paginator import Paginator,EmptyPage
 from django.contrib import messages
 from django.views.generic import UpdateView
+from water.models.client import Client
 
-from water.models.distributeur import Distributeur
-def distributeur(request):
-    list_distributeur=Distributeur.objects.all()
-    paginator= Paginator(list_distributeur.order_by('-dateCreation'),10)
+from authentication.models import User
+def user(request):
+    list_user=User.objects.all()
+    paginator= Paginator(list_user.order_by('-date_joined'),10)
     
     try:
         page= request.GET.get("page")
         if not page:
             page=1
-            list_distributeur=paginator.page(page)
+            list_user=paginator.page(page)
     except EmptyPage:
-        list_distributeur=paginator.page(paginator.num_pages())
+        list_user=paginator.page(paginator.num_pages())
     return render(request,'water/distributeur.html',locals())
-
-def create_distributeur(request):
+"""
+def create_user(request):
     if request.method=="POST":
         nom=request.POST.get('name')
         contact=request.POST.get('contact')
         adresse=request.POST.get('adresse')
         
-        distributeur= Distributeur(nom=nom,contact=contact,adresse=adresse)
-        distributeur.save()
+        user= User(nom=nom,contact=contact,adresse=adresse)
+        user.save()
     
     
-    return render(request,"water/form_distributeur.html")
+    return render(request,"water/form_user.html")
 
-class UpdateDistributeur(UpdateView):
-    model=Distributeur
-    template_name='water/form_distributeur.html'
+class UpdateUser(UpdateView):
+    model=User
+    template_name='water/form_user.html'
     
     def get(self,request,*args, **kwargs):
-        distributeur=get_object_or_404(Distributeur,pk=kwargs.get('pk'))
-        context = {'distributeur': distributeur}
+        user=get_object_or_404(User,pk=kwargs.get('pk'))
+        context = {'user': user}
         return render(request, self.template_name, context)
     
     def post(self, request, *args, **kwargs):
-        distributeur = get_object_or_404(Distributeur, pk=kwargs.get('pk'))
-        distributeur.nom = request.POST.get('nom')
-        distributeur.contact = request.POST.get('contact')
-        distributeur.adresse = request.POST.get('adresse')
-        distributeur.save()
-        return redirect('/water/distributeur/')
+        user = get_object_or_404(User, pk=kwargs.get('pk'))
+        user.nom = request.POST.get('nom')
+        user.contact = request.POST.get('contact')
+        user.adresse = request.POST.get('adresse')
+        user.save()
+        return redirect('/water/user/')
+"""
 
-def distributeur_client_list(request):
-    
-    return render(request,"water/client_list.html")
     
         
         

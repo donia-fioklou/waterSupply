@@ -1,17 +1,27 @@
-from django.shortcuts import render
 from django.shortcuts import render,get_object_or_404,redirect
 from django.views.generic import UpdateView
-from water.models.distributeur import Distributeur
+from authentication.models import User
+from django.core.paginator import Paginator,EmptyPage
 
 from water.models.provisionEau import ProvisionEau
 def approvisionner_distributeur(request,pk):
-    list_provision=ProvisionEau.objects.filter(distributeur_id=pk)
+    list_provision=ProvisionEau.objects.filter(user_id=pk)
+    paginator= Paginator(list_provision.order_by('-date_prov'),10)
+    
+    try:
+        page= request.GET.get("page")
+        if not page:
+            page=1
+            list_provision=paginator.page(page)
+    except EmptyPage:
+        list_provision=paginator.page(paginator.num_pages())
+        
     if request.method=="POST":
         qte=request.POST.get('qte')
-        distributeur=Distributeur.objects.get(id=pk)
+        user=User.objects.get(id=pk)
         
         
-        provision_eau= ProvisionEau(qte=qte,distributeur=distributeur)
+        provision_eau= ProvisionEau(qte=qte,user=user)
         provision_eau.save()
     
     return render(request,'water/provisionEau.html',locals())

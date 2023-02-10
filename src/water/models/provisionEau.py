@@ -1,12 +1,12 @@
 import uuid
 from django.db import models
 from water.models.client import Client
-from water.models.distributeur import Distributeur
+from authentication.models import User
 class ProvisionEau(models.Model):
     code=models.CharField( max_length=5,unique=True,blank=True)
     qte=models.IntegerField(max_length=4)
     date_prov=models.DateField(auto_now_add=True)
-    distributeur=models.ForeignKey(Distributeur,  on_delete=models.CASCADE,null=True)
+    user=models.ForeignKey(User,  on_delete=models.CASCADE,null=True)
     
     def save(self, *args, **kwargs):
         if not self.code:
