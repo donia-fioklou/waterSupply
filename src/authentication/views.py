@@ -16,3 +16,11 @@ def login_page(request):
             message = 'Identifiants invalides.'
     
     return render(request,'authenticate/login.html',context={'message':message})
+
+def logout_page(request):
+    logout(request)
+    return redirect("/water/login/")
+
+def registration_page(request):
+    
+    return render(request,'authenticate/registration.html')
