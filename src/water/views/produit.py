@@ -7,7 +7,7 @@ from django.views.generic import UpdateView
 from django.views.generic.edit import CreateView
 from water.models.produit import Produit
 
-class AuthorCreateView(CreateView):
+class ProduitCreateView(CreateView):
     model = Produit
     fields=["nom","qte"]
     template_name='water/form_produit.html'
@@ -20,7 +20,7 @@ def produit_list(request):
 
 class UpdateProduit(UpdateView):
     model=Produit
-    template_name='water/provisionEau.html'
+    template_name='water/form_produit.html'
     
     def get(self,request,*args, **kwargs):
         produit=get_object_or_404(Produit,pk=kwargs.get('pk'))
@@ -32,5 +32,5 @@ class UpdateProduit(UpdateView):
         produit.qte = request.POST.get('qte')
         produit.save()
        
-        return redirect('/water/provisionDis/')
+        return redirect('/water/produit/')
 

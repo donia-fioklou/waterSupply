@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card card-custom">
+    <div class="card-header">
+     <h3 class="card-title">
+      créer le compte d'un distributeur
+     </h3>
+     <h3>{{message}}</h3>
+    </div>
+    <!--begin::Form-->
+    <form class="form" method="post">
+    {% csrf_token %}
+     <div class="card-body">
+     
+      <div class="form-group">
+       <label>Nom d'utilisateur</label>
+       <input type="text" name="username" class="form-control form-control-solid" placeholder="nom d'utilisateur"/>
+      </div>
+        <div class="form-group">
+         <label>Email</label>
+         <input type="email" name="email" class="form-control form-control-solid" placeholder="email"/>
+        </div>
+        <div class="form-group">
+            <label>Nom</label>
+            <input type="text" name="lastName" class="form-control form-control-solid" placeholder="nom"/>
+        </div>
+        <div class="form-group">
+            <label>Prénom</label>
+            <input type="text" name="firstName" class="form-control form-control-solid" placeholder="prénom"/>
+        </div>
+        <div class="form-group">
+            <label>Adresse</label>
+            <input type="text" name="address" class="form-control form-control-solid" placeholder="adresse"/>
+        </div>
+
+        <div class="form-group"> 
+         <label>Mot de passe</label>
+         <input type="password" name="password" class="form-control form-control-solid" placeholder="mot de passe"/>
+        </div>
+
+        <div class="form-group">
+         <label>Confirmer mot de passe</label>
+         <input type="password" name="confirmPassword" class="form-control form-control-solid" placeholder="confirmer mot de passe"/>
+        </div>
+     
+     <div class="card-footer">
+      <button type="submit" class="btn btn-primary mr-2">Enregistrer</button>
+      <button type="reset" class="btn btn-secondary">Annuler</button>
+     </div>
+    </div>
+    </form>
+    <!--end::Form-->
+   </div>
+{% endblock content %}

@@ -1,7 +1,7 @@
 from django.db import models
 
 from water.models.client import Client
-from authentication.models import User
+from django.contrib.auth.models import User
 
 class Commande(models.Model):
     client=models.ForeignKey(Client,on_delete= models.CASCADE)

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import ListView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from water.models.client import Client
@@ -41,6 +42,11 @@ class ClientList(generics.ListCreateAPIView):
 
     def get_queryset(self):
         return self.queryset.filter(user=self.request.user)
+
+
+    
+    
+
 
 
 

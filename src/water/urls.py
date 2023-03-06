@@ -3,8 +3,8 @@ from water.views.client import  ClientList, ClientUpdate, create_client
 from water.views.commande import Approvisionner,CommandeList, CommandeUpdate, create_commande
 from water.views.dashbord import dashbord
 from water.views.distributeur import user
-from water.views.produit import AuthorCreateView, produit_list
-from water.views.provision import UpdateProvisionEau, approvisionner_distributeur
+from water.views.produit import  ProduitCreateView, UpdateProduit, produit_list
+from water.views.provision import UpdateProvisionEau, approvisionner_distributeur, provision_list
 
 app_name = 'water'
 
@@ -17,7 +17,7 @@ urlpatterns = [
     #path('user/update/<int:pk>/',UpdateDistributeur.as_view(),name='update_user'),
     path('provisionDis/<int:pk>',approvisionner_distributeur,name="provisionDis"),
     path('provisionDis/update/<int:pk>',UpdateProvisionEau.as_view(),name="update_provisionDis"),
-    
+    path('distributeur/provision/list/<int:pk>',provision_list,name='provision_list'),
     #path('client/<int:pk>', ClientList.as_view(), name='client-list'),
     path('client/', ClientList.as_view(), name='client-list'),
     path('client/<int:pk>/update/', ClientUpdate.as_view(), name='client-update'),
@@ -29,5 +29,6 @@ urlpatterns = [
     path('approvisionner/<int:pk>/update/', Approvisionner.as_view(), name='commande-update'),
     
     path('produit/',produit_list,name='liste_produit'),
-    path('produit/create',AuthorCreateView.as_view(),name='create_produit')
+    path('produit/create',ProduitCreateView.as_view(),name='create_produit'),
+    path('produit/update/<int:pk>',UpdateProduit.as_view(),name='update_produit')
 ]

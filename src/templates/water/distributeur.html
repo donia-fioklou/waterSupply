@@ -8,9 +8,12 @@
                 <span class="card-label font-weight-bolder text-dark">Liste des distributeurs</span>
                <!--<span class="text-muted mt-3 font-weight-bold font-size-sm">More than 400+ new members</span>--> 
             </h3>
-            <!--
+            
+        <div class="card-toolbar"> 
+                <a href="{% url 'admin:index' %}" class="btn btn-info font-weight-bolder font-size-sm">Enregistrer distributeur</a>
+        </div>
           
-           -->
+         
         </div>
         <!--end::Header-->
         <!--begin::Body-->
@@ -37,8 +40,8 @@
                                     <!--end::Svg Icon-->
                                 </span>
                             </th>
-                            <th style="min-width: 120px">Contact</th>
-                            <th style="min-width: 120px">Adresse</th>
+                            <th style="min-width: 120px">Email</th>
+                            
                             <th class="pr-0 text-right" style="min-width: 160px">Action</th>
                         </tr>
                     </thead>
@@ -46,10 +49,10 @@
                         {% for user in list_user %}
                             <tr>
                                 <td>{{forloop.counter}} </td>
-                                <td><a href="{% url 'water:client-list'  %}">{{user.username}}</a></td>
+                                <td><a href="{% url 'water:provision_list' user.pk  %}">{{user.username}}</a></td>
                                 <td>{{user.date_joined|date:'j/m/y'}}</td>
-                                <td>{{user.contact}}</td>
-                                <td>{{user.adresse}}</td>
+                                <td>{{user.email}}</td>
+                                
                                 <td class="pr-0 text-right">
                                     <a href="{% url 'water:provisionDis' user.pk %}" class="btn btn-icon btn-light btn-hover-primary btn-sm">
                                         <span class="svg-icon svg-icon-md svg-icon-primary">

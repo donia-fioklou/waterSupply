@@ -1,7 +1,7 @@
 import uuid
 from django.db import models
 from water.models.client import Client
-from authentication.models import User
+from django.contrib.auth.models import User
 class ProvisionEau(models.Model):
     code=models.CharField( max_length=5,unique=True,blank=True)
     qte=models.IntegerField(max_length=4)
