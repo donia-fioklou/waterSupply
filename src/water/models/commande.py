@@ -12,3 +12,4 @@ class Commande(models.Model):
     date_appro=models.DateField(null=True)
     com_statut=(('E','En attente'),
                  ('L','Livrer')   )
+    commandeStatut=models.CharField(max_length=1,choices=com_statut,default='E',verbose_name='rôle')

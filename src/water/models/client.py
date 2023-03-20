@@ -8,6 +8,8 @@ class Client(models.Model):
     nom=models.CharField( max_length=50)
     contact=models.IntegerField(max_length=8)
     adresse=models.CharField(max_length=200)
+    longitude=models.DecimalField(max_digits=9,decimal_places=6,null=True)
+    latitude=models.DecimalField(max_digits=9,decimal_places=6,null=True)
     localiston=Localisation()
     dateCreation=models.DateField(auto_now_add=True)
     

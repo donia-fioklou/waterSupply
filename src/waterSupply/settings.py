@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-ax#7q&*h8dxd4-3xmh^w6&i#&$_y8a)gzoa1_01_fcdr7wuuy0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.142','127.0.0.1','10.0.2.2']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -53,6 +53,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
@@ -156,3 +157,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 from django_safe_settings.patch import patch_all
 patch_all()
+
+CSRF_TRUSTED_ORIGINS = ["https://8bac-196-169-1-39.eu.ngrok.io"]

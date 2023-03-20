@@ -13,6 +13,17 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
+class ClientViewSet(ModelViewSet):
+    queryset = Client.objects.all()
+    serializer_class = ClientSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return self.queryset.filter(user=self.request.user)
+
+
+   
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def create_client(request):

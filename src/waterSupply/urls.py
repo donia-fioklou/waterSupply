@@ -15,13 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from rest_framework import routers
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
 
+from water.views.client import ClientViewSet
+from water.views.commande import CommandeViewSet
+
+router = routers.SimpleRouter()
+router.register('client', ClientViewSet,basename='client')
+router.register('commande', CommandeViewSet,basename='commande')
+
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
+    path('api/',include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
