@@ -1,11 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from water.models.commande import Commande
-from water.serialisers.serializer_client import ApprovisonnerSerializer, CommandeSerializer
+from water.serialisers.serializer import ApprovisonnerSerializer, CommandeSerializer
 from rest_framework import generics, permissions,status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
+from django.views.generic import ListView
+from django.contrib.auth.models import User
 
 class CommandeViewSet(ModelViewSet):
     queryset = Commande.objects.all()
@@ -22,17 +24,20 @@ class CommandeViewSet(ModelViewSet):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def create_commande(request):
-    serializer = CommandeSerializer(data=request.data)
-    if serializer.is_valid():
-        user = request.user
-        data = request.data
-        data['user'] = user
-        serializer.save(**data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class CommandeList(ListView):
+    model = Commande
+    template_name = 'client/commande_list.html'
+    context_object_name = 'commandes'
+
+    def get_queryset(self):
+        self.User = get_object_or_404(User, id=self.kwargs['pk'])
+        return Commande.objects.filter(user=self.User)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['User'] = self.User
+        return context
+
 
 class Approvisionner(generics.UpdateAPIView):
     queryset = Commande.objects.all()
@@ -44,20 +49,4 @@ class Approvisionner(generics.UpdateAPIView):
 
 
         
-        
-class CommandeUpdate(generics.UpdateAPIView):
-    queryset = Commande.objects.all()
-    serializer_class = CommandeSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-    def get_queryset(self):
-        return self.queryset.filter(user=self.request.user)
-
-
-class CommandeList(generics.ListCreateAPIView):
-    queryset = Commande.objects.all()
-    serializer_class = CommandeSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-    def get_queryset(self):
-        return self.queryset.filter(user=self.request.user)
+  

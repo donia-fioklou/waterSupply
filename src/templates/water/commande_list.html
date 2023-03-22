@@ -5,7 +5,7 @@
         <!--begin::Header-->
         <div class="card-header border-0 py-5">
             <h3 class="card-title align-items-start flex-column">
-                <span class="card-label font-weight-bolder text-dark">Liste des Clients du  distributeur {{context.user}} </span>
+                <span class="card-label font-weight-bolder text-dark">Liste des Commandes du  distributeur {{context.user}} </span>
                <!--<span class="text-muted mt-3 font-weight-bold font-size-sm">More than 400+ new members</span>--> 
             </h3>
            
@@ -21,9 +21,9 @@
                         <tr class="text-left">
                             
                             <th class="pl-0" style="min-width: 120px">#</th>
-                            <th style="min-width: 110px">Nom</th>
+                            <th style="min-width: 110px">Client</th>
                             <th style="min-width: 110px">
-                                <span class="text-info">Date</span>
+                                <span class="text-info">Quantité</span>
                                 <span class="svg-icon svg-icon-sm svg-icon-primary">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Down-2.svg-->
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -36,19 +36,19 @@
                                     <!--end::Svg Icon-->
                                 </span>
                             </th>
-                            <th style="min-width: 120px">Contact</th>
-                            <th style="min-width: 120px">Adresse</th>
+                            <th style="min-width: 120px">Montant</th>
+                            <th style="min-width: 120px">Statut</th>
                             
                         </tr>
                     </thead>
                     <tbody>
-                        {% for client in clients %}
+                        {% for commande in commandes %}
                             <tr>
                                 <td><a href="">{{forloop.counter}}</a> </td>
-                                <td>{{client.nom}}</td>
-                                <td>{{client.dateCreation|date:'j/m/y'}}</td>
-                                <td>{{client.contact}}</td>
-                                <td>{{client.adresse}}</td>
+                                <td>{{commande.client}}</td>
+                                <td>{{commande.qte}}</td>
+                                <td>{{commande.montant}}</td>
+                                <td>{{commande.statut}}</td>
                                
                                 
                             </tr>
@@ -61,7 +61,7 @@
                 </table>
                 <!--<div>
                     {% if list_user.has_previous %}
-                        <a href="{% url 'client' %}?page={{list_user.previous_page_number}}">Précédent</a>
+                        <a href="{% url 'commande' %}?page={{list_user.previous_page_number}}">Précédent</a>
                     {% endif %}
                     
                     <span>
@@ -69,7 +69,7 @@
                     </span>
               
                     {% if list_user.has_next %}
-                    <a href="{% url 'client' %}?page={{list_user.next_page_number}}">Suivant</a>
+                    <a href="{% url 'commande' %}?page={{list_user.next_page_number}}">Suivant</a>
                     {% endif %}
                 </div>-->
                 

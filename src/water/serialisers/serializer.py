@@ -8,13 +8,16 @@ class ClientSerializer(ModelSerializer):
     class Meta:
         model = Client
         fields = ['id','nom', 'contact', 'adresse']
+    def create(self, validated_data):
+        user = self.context['request'].user
+        return Client.objects.create(user=user, **validated_data)
 
 
 class CommandeSerializer(ModelSerializer):
 
     class Meta:
         model = Commande
-        fields = ['id', 'qte_sachet', 'client', 'date_com',
+        fields = ['id', 'user','qte_sachet', 'client', 'date_com',
                   'montant',
                   'date_appro',
                   'commandeStatut',]
