@@ -36,6 +36,8 @@ class ClientList(ListView):
         context['User'] = self.User
         return context
 
+
+
     
 
     

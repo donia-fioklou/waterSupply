@@ -10,7 +10,7 @@
             </h3>
             
         <div class="card-toolbar"> 
-                <a href="{% url 'admin:index' %}" class="btn btn-info font-weight-bolder font-size-sm">Enregistrer distributeur</a>
+                <a href="{% url 'water:create_distributeur' %}" class="btn btn-info font-weight-bolder font-size-sm">Enregistrer distributeur</a>
         </div>
           
          
@@ -70,6 +70,7 @@
                                         </a>
 
                                         <a href="{% url 'water:distributeur_client_list' user.pk %}">Clients</a>
+                                        <a href="{% url 'water:commande_client_list' user.pk %}">Commandes</a>
                                         
 
                                     

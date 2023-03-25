@@ -1,8 +1,7 @@
-from django.shortcuts import render,get_object_or_404,redirect
+from django.shortcuts import render
 from django.core.paginator import Paginator,EmptyPage
-from django.contrib import messages
-from django.views.generic import UpdateView
-from water.models.client import Client
+from django.shortcuts import redirect, reverse
+
 
 from django.contrib.auth.models import User
 def user(request):
@@ -17,6 +16,9 @@ def user(request):
     except EmptyPage:
         list_user=paginator.page(paginator.num_pages())
     return render(request,'water/distributeur.html',locals())
+
+def create_user(request):
+    return redirect(reverse('admin:auth_user_add'))
 
     
         

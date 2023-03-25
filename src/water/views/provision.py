@@ -33,7 +33,7 @@ def approvisionner_distributeur(request,pk):
     return render(request,'water/provision_form.html',locals())
 
 def provision_list(request,pk):
-    list_provision=ProvisionEau.objects.filter(user_id=pk)
+    list_provision=ProvisionEau.objects.filter(user_id=pk).order_by("-date_prov")
     return render(request,"water/provision.html",locals())
 
 class UpdateProvisionEau(UpdateView):
@@ -49,6 +49,6 @@ class UpdateProvisionEau(UpdateView):
         provision_eau = get_object_or_404(ProvisionEau, pk=kwargs.get('pk'))
         provision_eau.qte = request.POST.get('qte')
         provision_eau.save()
-       
-        return redirect('/water/provisionDis/')
+        return redirect('/water/distributeur/provision/list/'+str(provision_eau.user_id))
+        
 
