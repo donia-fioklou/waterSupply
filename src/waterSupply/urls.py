@@ -36,6 +36,6 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     
     path('water/',include('water.urls')),
-    path('authenticate/',include('authentication.urls')),
+    path('',include('authentication.urls')),
     
 ]

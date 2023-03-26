@@ -11,7 +11,7 @@ app_name = 'water'
 
 urlpatterns = [
 
-    path('dashbord/',dashbord,name='dashbord'),
+    path('dashbord/',dashbord,name='dashboard'),
     path('distributeur/',user,name='distributeur'),
     path('distributeur/create',create_user,name='create_distributeur'),
    

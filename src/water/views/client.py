@@ -1,18 +1,11 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404
 from django.views.generic import ListView
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.response import Response
 from water.models.client import Client
 from water.serialisers.serializer import ClientSerializer
-from rest_framework import generics, permissions,status
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
-
-from rest_framework import status
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework import permissions
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class ClientViewSet(ModelViewSet):
     queryset = Client.objects.all()
@@ -22,7 +15,8 @@ class ClientViewSet(ModelViewSet):
     def get_queryset(self):
         return self.queryset.order_by("-dateCreation").filter(user=self.request.user)
 
-class ClientList(ListView):
+class ClientList(LoginRequiredMixin,ListView):
+    login_url='/login/'
     model = Client
     template_name = 'client/client_list.html'
     context_object_name = 'clients'
